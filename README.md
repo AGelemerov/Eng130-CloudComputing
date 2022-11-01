@@ -1,18 +1,11 @@
-<link href="/images/images.css" rel="stylesheet"></link>
-<div>
-  <style>
-    img[alt=small] {
-      width: 300px;
-    }
-  </style>
-</div>
 # Cloud Computing
 
 ## What is cloud computing?
 Cloud computing is the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user. Large clouds often have functions distributed over multiple locations, each of which is a data center.
 
 ## Serverful Models
-![small](images/IaaS_PaaS_SaaS.jpg)
+<img align="middle" width=500px src="images/IaaS_PaaS_SaaS.jpg">
+
 ### Software as a Service (SaaS)
  - Cloud provider gives access to applications on a subscription basis
 ### Platform as a Service (PaaS)
@@ -92,7 +85,7 @@ Some companies who use AWS:
    1. Go in there and create any rule for any port you want 
 
 ## Setup reverse proxy with `nginx`
-# How to set up reverse proxy with nginx / #
+# How to set up reverse proxy with nginx
 
 1. Go to your home location (default location, no folders)
 2. `cd /etc/nginx/sites-available`

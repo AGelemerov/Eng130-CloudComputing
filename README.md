@@ -1,9 +1,12 @@
+<link href="/images.css" rel="stylesheet"></link>
+
 # Cloud Computing
 
 ## What is cloud computing?
 Cloud computing is the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user. Large clouds often have functions distributed over multiple locations, each of which is a data center.
 
 ## Serverful Models
+![image alt Difference small](images/IaaS_PaaS_SaaS.jpg)
 ### Software as a Service (SaaS)
  - Cloud provider gives access to applications on a subscription basis
 ### Platform as a Service (PaaS)

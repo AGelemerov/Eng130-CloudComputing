@@ -1,3 +1,11 @@
 img[alt=small] {
     width: 50px;
 }
+
+img[alt=medium] {
+    width: 50px;
+}
+
+img[alt=large] {
+    width: 50px;
+}

@@ -60,3 +60,63 @@ Some companies who use AWS:
    - utilities
    - property taxes
    - cost of goods sold (COGS)
+
+## Setup VM instance on AWS
+
+1. Go to the EC2 page on AWS and click on this button (labeled in red)
+
+![ec2 large](images/EC2_home_page.png)
+
+2. Provide all information asked (apart from Advanced at the bottom, unless needed)
+  1. Ensure you select the appropriate operating system and plan so you don't get charged
+  2. Select key pair if you have it, if not create a new one
+  3. Select your network security group (create a new one if you don't have one)
+  4. Allow http trafic if you need to host website
+      1. Not https as you probably do not have the required key
+  5. If you want to enable SSH connection make sure you use your IP instead of the default `0.0.0.0/0` 
+  6. You can use a different amount of storage if you want but 8GiB should be enough
+3. Click on `Launch Instance` if ready
+4. If you recieve any errors try to fix them and try again
+5. Go to the Instances tab on the left and click it, you should see your instance running or initialising
+
+## Editing incoming rules for network security
+1. Head to your instace tab (code with letters and numbers that has a typical hyperlink look)
+2. Go to the Security tab and click on the hyperlinked security group code
+3. From there at the bottom right you should see "Edit inbound rules"
+   1. Go in there and create any rule for any port you want 
+
+## Setup reverse proxy with `nginx`
+# How to set up reverse proxy with nginx / #
+
+1. Go to your home location (default location, no folders)
+2. `cd /etc/nginx/sites-available`
+3. `sudo nano default` - ensure you use sudo, otherwise you wont be able to edit
+4. look for the server block
+5. within server, look for location block
+6. write the following commands (ensure any other lines are deleted from that block):
+
+    ```
+        location / {
+                proxy_pass http://localhost:8080;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+            }
+    ```
+
+7. replace "8080" with whatever port you need
+8. Press Ctrl + x to begin exit
+9. Press Y to agree to changes
+10. Press Enter to save and exit
+11. sudo nginx -t
+    1. testing the syntax
+12. sudo systemctl restart nginx
+13. npm start
+14. You are good to go
+
+## Providing SSH key
+
+1. Locate your `.pem` file containing the key
+2. **Move** it to the `.ssh` folder (so C:Users/name/.ssh)

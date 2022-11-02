@@ -84,8 +84,7 @@ Some companies who use AWS:
 3. From there at the bottom right you should see "Edit inbound rules"
    1. Go in there and create any rule for any port you want 
 
-## Setup reverse proxy with `nginx`
-# How to set up reverse proxy with nginx
+## How to set up reverse proxy with nginx
 
 1. Go to your home location (default location, no folders)
 2. `cd /etc/nginx/sites-available`

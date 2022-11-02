@@ -14,6 +14,10 @@ Cloud computing is the on-demand availability of computer system resources, espe
  - Cloud providergives access to bare servers
 ## Why should you use cloud computing and its benefits
 
+- Ease of use
+- Flexibility
+- Robustness
+- Cost
 ### Flexibility
   1. Scalability: Cloud infrastructure scales on demand to support fluctuating workloads.
   2. Storage options: Users can choose public, private, or hybrid storage offerings, depending on security needs and other considerations.
@@ -118,3 +122,38 @@ Some companies who use AWS:
 
 1. Locate your `.pem` file containing the key
 2. **Move** it to the `.ssh` folder (so C:Users/name/.ssh)
+
+How it all works
+
+1. We setup both the app and the database machines
+2. App machine
+   1. No changes to security rules
+   2. Setup npm and nginx with reverse proxy
+   3. Provide an environment variable with the export command
+      1. `export DB_HOST="mongodb://192.168.10.150:27017/posts"
+   4. go to app folder and `npm install`
+   5. `npm start`
+   6. should be `listening on port 3000`
+3. Database machine
+   1. `sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927`
+   2. `echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list`
+   3. `sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20`
+   4. `sudo apt-get update -y`
+   5. `sudo apt-get upgrade -y`
+   6. `run sudo nano /etc/mongod.conf`
+   7. Go to security group for your database and add the app hosting machine ip to the rules with 27017 port (default for mongodb)
+   8. `sudo systemctl restart mongod`
+   9. `sudo systemctl status mongod` - check status and ensure mongodb is running fine
+## Steps taken to achieve data retrieval from and back to a client
+![](images/2tier_diagram.png)
+ - Step 1: The client makes a request to load a db resource 
+ - Step 2: The request travels to the intermediate
+server 
+ - Step 3: The request gets processed and a request is sent to the database server
+ - Step 4: The app server has previously been allowed (via networking rules/firewalls) and given information about where to connect 
+ - Step 5: App server connects to database server as required ports and permissions have been granted 
+ - Step 6: The database server processes the request and sends the query results back to the app server (as they are already connected no additional steps are required) 
+ - Step 7: The App server processes the data and Integrates it into the app for the client's needs and ease of use 
+ - Step 8: The App server sends the result of the inital request back to the client 
+ - Step 9: The client sees the requested data
+

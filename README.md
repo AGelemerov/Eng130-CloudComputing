@@ -157,3 +157,30 @@ server
  - Step 8: The App server sends the result of the inital request back to the client 
  - Step 9: The client sees the requested data
 
+## Disaster Recovery
+
+### What is Disaster Recovery?
+Disaster recovery is the process by which an organization anticipates and addresses technology-related disasters. IT systems in any company can go down unexpectedly due to unforeseen circumstances, such as power outages, natural events, or security issues. Disaster recovery includes a company's procedures and policies to recover quickly from such events.
+
+### Advantages of DR
+- Continuity
+  - We need services to be operational at all times without any down time
+- Enhanced Security
+  - Cloud services have enhanced security measures so that data loss to ransomware is limted. Data backup and restore policies can ensure this.
+- Customer retention
+  - Ensure you keep the client using your services as long as possible. Provide support and updates on times of disaster.
+- Cost efficiency
+
+
+
+
+## Install aws configuration and cli on ubuntu
+### Install the following:
+- python3 - `sudo apt install python3`
+- pip - `sudo apt install python3-pip`
+- awscli - `sudo pip3 install awscli`
+- run to configure aws access `aws configure`
+  - enter all details - region-> eu-west-1, output-> json
+
+- force python to always use python3
+  - `alias python=python3`

@@ -157,6 +157,19 @@ server
  - Step 8: The App server sends the result of the inital request back to the client 
  - Step 9: The client sees the requested data
 
+## Images
+Images are an extremely useful tool, they are cheap to keep and provide reusability on the machine level. When we create an image from an instance, we take a snapshot at that specific time. Any data on the machine or installations etc., are also stored. When we load a new instance from the image it is essentially a copy or the machine used to take the image at that time.
+### Creating an image from an EC2 instance
+1. Go to your Instances tab
+2. Select the instace you want to make an image out of
+3. Ensure it is running
+4. Go to Actions -> Image -> Create Image
+5. Name it however you want but follow a naming convention for ease of use
+6. In the description provide details on what the image has inside it
+7. Provide extra space if needed
+8. Create your Image
+9. DO NOT turn off or terminate the machine you are making an image from while the image is being created or it will fail/not create. Ensure to wait until the image says "Available" on its status field. (You can access it by clicking on the link in the green bar which appears at the top after you click create image)
+
 ## Disaster Recovery
 
 ### What is Disaster Recovery?
@@ -171,16 +184,54 @@ Disaster recovery is the process by which an organization anticipates and addres
   - Ensure you keep the client using your services as long as possible. Provide support and updates on times of disaster.
 - Cost efficiency
 
+## What is S3?
+S3 is a service which allows you to store data which is infrequently accessed.
+![whatiss3](images/product-page-diagram_Amazon-S3_HIW.cf4c2bd7aa02f1fe77be8aa120393993e08ac86d.png)
 
+### Use cases
+ - Build a data lake
+   - Run big data analytics, artificial intelligence (AI), machine learning (ML), and high performance computing (HPC) applications to unlock data insights.
+ - Back up and restore critical data
+   - Meet Recovery Time Objectives (RTO), Recovery Point Objectives (RPO), and compliance requirements with S3’s robust replication features.
+ - Archive data at the lowest cost
+   - Move data archives to the Amazon S3 Glacier storage classes to lower costs, eliminate operational complexities, and gain new insights.
+ - Run cloud-native applications
+   - Build fast, powerful mobile and web-based cloud-native apps that scale automatically in a highly available configuration.
 
+#### Storage classes
+ - General purpose
+ - Unknown or changing access
+ - Infrequent access
+ - Archive
+ - S3 on Outposts
+### Benefits of S3
+  1. High availability  
+     1. S3 Standard is designed for 99.99% availability
+  2. High security
+     1. 
+  3. Low cost
+     1. Very afforable, very low cost for what it provides
+  4. Management
+     1. Simple as you do not manage the hardware - as it is on cloud
 
 ## Install aws configuration and cli on ubuntu
+
+![s3](images/s3.png "S3 access and configuration")
 ### Install the following:
 - python3 - `sudo apt install python3`
 - pip - `sudo apt install python3-pip`
+- `pip3 install boto3`
 - awscli - `sudo pip3 install awscli`
 - run to configure aws access `aws configure`
   - enter all details - region-> eu-west-1, output-> json
 
 - force python to always use python3
   - `alias python=python3`
+
+
+## Download an object from S3 to EC2 instance
+- `aws s3api get-object --bucket DOC-EXAMPLE-BUCKET1 --key dir/my_images.tar.bz2 my_images.tar.bz2`
+- So for example:
+  - `aws s3api get-object --bucket eng130-angel --key testing-s3.txt testing-s3.txt`
+
+## Upload an object from EC2 to S3

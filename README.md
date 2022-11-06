@@ -229,9 +229,50 @@ S3 is a service which allows you to store data which is infrequently accessed.
   - `alias python=python3`
 
 
-## Download an object from S3 to EC2 instance
-- `aws s3api get-object --bucket DOC-EXAMPLE-BUCKET1 --key dir/my_images.tar.bz2 my_images.tar.bz2`
-- So for example:
-  - `aws s3api get-object --bucket eng130-angel --key testing-s3.txt testing-s3.txt`
-
 ## Upload an object from EC2 to S3
+
+## Autoscalng and Load balancing
+multiple instances of same app
+4 instances- exact same configs - traffic coming from outside - how do you know which user is pointed to the correct machine
+### High availability
+
+### Scalability
+
+### Multi AZ (Availability Zone) deployment
+
+## How to set up alarms for an EC2 instance
+ 1. Create an instance (via normal way or Auto Scaling Group, aka. ASG)
+    1. If creating with ASG, it is best to set the auto scaling threshold the same as your alarm threshold
+ 2. Go to the instances tab on the left of EC2 tab
+ 3. Go to the Alarms column of the instance you want to make an alarm for and press the "No alarms" text
+
+## S3 bucket:
+1. Open Git bash and connect to the instance you want to backup files from or download to
+2. From there you can execute the following commands depending on what you want to do
+3. Create a bucket
+   1. `aws s3 mb <target> [--options]`
+4. List buckets
+   1. `aws s3 ls <target> [--options]`
+5. Delete buckets
+   1. `aws s3 rb <target> [--options]`
+   2. Example
+   3. `aws s3 rb s3://bucket-name`
+6. Move objects
+   1. `aws s3 mv <source> <target> [--options]`
+   2. Examples
+      1. `aws s3 mv s3://bucket-name/example s3://my-bucket/`
+7. Copy objects
+   1. `aws s3 cp <source> <target> [--options]`
+   2. examples
+      1. `aws s3 cp filename.txt s3://bucket-name`
+      2. `aws s3 cp s3://bucket-name/filename.txt ./`
+      3. `aws s3 cp s3://bucket-name/example s3://my-bucket/`
+8. Download an object from S3 to EC2 instance
+   1. `aws s3api get-object --bucket DOC-EXAMPLE-BUCKET1 --key dir/my_images.tar.bz2 my_images.tar.bz2`
+   2. So for example:
+      - `aws s3api get-object --bucket eng130-angel --key testing-s3.txt testing-s3.txt`
+9.  Delete object from bucket
+   3. `aws s3api delete-object --bucket my-bucket --key test.txt`
+10. Upload object from EC2 instance to S3 bucket
+   4. `aws s3 cp C:\S3Files\Script1.txt s3://mys3bucket-testupload1/`
+   5. add `--recursive` tag at the end to upload the entire directory

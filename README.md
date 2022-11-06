@@ -276,3 +276,52 @@ multiple instances of same app
 10. Upload object from EC2 instance to S3 bucket
    4. `aws s3 cp C:\S3Files\Script1.txt s3://mys3bucket-testupload1/`
    5. add `--recursive` tag at the end to upload the entire directory
+
+## Auto Scaling Groups
+1. Inside the EC2 tab, right at the very bottom, there is a tab for Auto Scaling Groups
+2. Inside there you should see a button labeled "Create Auto Scaling Group"
+3. Fill out the name of your group (follow conventions for easier use later)
+4. If you do not have a launch template, create one
+   1. A launch template is essentially an EC2 instance
+   2. You can use any AMIs or create a new EC2 configuration
+   3. Whatever template you provide will be the configuration for every machine created by the ASG
+   4. If you need to change anything in the template such as User Data (for automation), ou can modify your template by going to the actions tab and clicking the Modify template
+   5. This will make a **new version** of the template which you wil have to select in the version category while selecting the template in the ASG configuration
+5. In step 2, select your availability zones(eu-west-1a,b,c) and VPC(default for now)
+6. Ensure the instance type is selected already, if you see more than the "Network" and "Instance type requirements" then you have not selected your instace type requirement while creating your template(e.g. t2.micro)
+7. In step 3, select a load balancer if you do have one
+   1. If not follow these steps, if you do, skip part 7
+   2. Click on "Attach to a new load balancer"
+   3. Select the appropriate balancer type (i.e. in our case Application load balancer)
+   4. Load balancer scheme should be "internet facing"
+   5. In the Health checks section, ensure to select ELB
+8. In step 4, select the wanted amount for each of the categories
+   1. Minimum is minimum
+   2. Desired is usual operations amount
+   3. Maximum is the amount which the ASG stops creating new instances
+9. Next step is to add notifications
+   1.  Refer to Alarms section to see how to make these
+   2.  Select the wanted notification
+   3.  Do not worry this can be altered later
+10. Tags are important, ensure to mention a "Name" tag for your ASG instances so you can clearly see and differentiate them later from other instances(follow convetions)
+11. Review each stage and ensure all details are correct
+12. Create the group
+
+## Alarms
+1. To create an alarm go to the Cloud Watch tab
+2. Click on "All alarms" on the left under Alarms
+3. Click "Create Alarm"
+4. Under "Select metric"
+   1. Select EC2
+   2. Select "By Auto Scaling Group"
+   3. Search for your ASG and select the wanted alarm trigger (e.g. CPU utilisation)
+   4. When selected all, click Select Metric
+   5. Provide details
+      1. Threshold value is a percentage (although example is for some reason 1000)
+   6. Step 2 
+      1. Select "In alarm"
+      2. Select or create an existing topic
+   7. Step 3
+      1. Name the alarm and add any extra message as this will be emailed to you
+   8. Review all details and ensure all provided date is correct
+   9. Create your alarm

@@ -229,11 +229,6 @@ S3 is a service which allows you to store data which is infrequently accessed.
   - `alias python=python3`
 
 
-## Upload an object from EC2 to S3
-
-## Autoscalng and Load balancing
-multiple instances of same app
-4 instances- exact same configs - traffic coming from outside - how do you know which user is pointed to the correct machine
 ### High availability
 
 ### Scalability
@@ -325,3 +320,9 @@ multiple instances of same app
       1. Name the alarm and add any extra message as this will be emailed to you
    8. Review all details and ensure all provided date is correct
    9. Create your alarm
+
+## Topics
+
+## NACL
+Added layer of security on a subnet level, whereas a security group is on an instance level
+Both inbound and outbound rules must be defined

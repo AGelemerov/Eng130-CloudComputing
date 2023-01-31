@@ -320,9 +320,3 @@ S3 is a service which allows you to store data which is infrequently accessed.
       1. Name the alarm and add any extra message as this will be emailed to you
    8. Review all details and ensure all provided date is correct
    9. Create your alarm
-
-## Topics
-
-## NACL
-Added layer of security on a subnet level, whereas a security group is on an instance level
-Both inbound and outbound rules must be defined
